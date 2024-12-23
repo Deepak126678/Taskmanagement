@@ -1,0 +1,183 @@
+
+#headline{
+    text-align: center;
+    
+    font-family: 'Roboto', sans-serif;
+}
+nav{
+    display: flex;
+    justify-content: space-evenly;
+}
+button{
+    border:2px solid black;
+    border-radius: 25%;
+    height: 50px;
+    width:60px;
+}
+/* Style for the task list */
+#taskList {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    margin: 0;
+    text-align: left; /* Align all content to the left */
+}
+
+/* Style for each task item */
+#taskList h1 {
+    display: block; /* Change from flex to block */
+    margin-bottom: 10px;
+    font-size: 30px;
+    background-color: grey;
+}
+
+/* Task description and button container */
+#taskList div {
+    margin-left: 20px; /* Keep indent */
+    display: block; /* Ensure divs take full width */
+}
+
+
+/* Buttons */
+#taskList button {
+    display: inline-block; /* Inline for spacing */
+    margin-right: 10px; /* Space between buttons */
+}
+
+/* Checkbox */
+#taskList input[type="checkbox"] {
+    margin-right: 10px; /* Space between checkbox and text */
+}
+/* Style the label */
+label {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px; /* Space between label and dropdown */
+}
+
+/* Style the dropdown */
+#priorityfilter {
+    width: 150px; /* Adjust width */
+    padding: 8px 12px; /* Add padding for better appearance */
+    font-size: 16px; /* Font size */
+    font-family: 'Arial', sans-serif; /* Custom font */
+    color: #333; /* Text color */
+    background-color: #f9f9f9; /* Background color */
+    border: 2px solid #007BFF; /* Border styling */
+    border-radius: 50%; /* Rounded corners */
+    outline: none; /* Remove outline */
+    cursor: pointer; /* Pointer cursor on hover */
+    appearance: none; /* Remove default arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+}
+
+/* Add hover effect */
+#priorityfilter:hover {
+    background-color: rgb(201, 166, 166); /* Change background on hover */
+    border-color: cyan; /* Darker border */
+}
+
+
+
+/* Adjust dropdown options */
+#priorityfilter option {
+    font-size: 16px;
+    padding: 10px; /* Add padding inside options */
+    background-color: #fff;
+    color: #333;
+}
+
+/* Align the dropdown with the label */
+label, #priorityfilter {
+    vertical-align: middle;
+}
+#taskSearch{
+    border:2px solid black;
+    border-radius: 30vw;
+}
+footer{
+    text-align: center;
+}
+#taskContain{
+    display:flex;
+    width:100%;
+}
+#tasks{
+    width:60%;
+
+}
+#imageContain {
+    position: relative; /* Ensures the div can act as a container */
+    width: 100%; /* Adjust width as needed */
+    height: 100%; /* Adjust height as needed */
+    overflow: hidden; /* Ensures image does not overflow the div */
+}
+
+
+    #imageContain img {
+      
+        width: 100%; /* Makes the image fill the div horizontally */
+        height: 100%; /* Makes the image fill the div vertically */
+        object-fit: cover; /* Ensures the image scales and crops proportionally */
+    }
+button:hover{
+    background-color: lightgreen;
+}
+    
+#taskForm {
+    max-width: 500px;
+   
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Label styling */
+#taskForm label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+
+#taskForm input[type="text"]:focus,
+#taskForm textarea:focus,
+#taskForm select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Checkbox styling */
+#taskForm input[type="checkbox"] {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+/* Button styling */
+#taskForm button[type="submit"] {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#taskForm button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+#taskdiv{
+    width:100%;
+    background-color: black;
+}
+

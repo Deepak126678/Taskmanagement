@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Management system</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1 id = "headline">Task Management system</h1>
+     <nav>
+        <Button id="button">Add Task</Button> 
+    <label for="priorityfilter">Priority:</label>
+    <select name="task-priority" id="priorityfilter" required>
+        <option value="All">All</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+        
+    </select><br>
+    <input type="text" id="taskSearch" placeholder="Search tasks..." />
+    <label for="taskstatus">TaskStatus</label>
+    <select name="taskstatus" id="taskstatus" required>
+        <option value="All">All</option>
+        <option value="High">Completed</option>
+        <option value="Medium">Incompleted</option>
+        
+        
+    </select><br>
+    <button id="togglebutton">Switch Mode</button>
+  
+  </nav>
+  </header>
+  
+    
+
+  
+  <div id="taskDiv" style="display: none;">
+    <form id="taskForm">
+        <label for="task-title">Enter Task Title:</label><input type="checkbox" for ="task-title"><br>
+        <input type="text" id="task-title" required><br>
+        <label for="task-desc">Task Description</label><br>
+        <textarea id="task-desc" name="task-desc" rows="8" cols="40" required></textarea><br>
+        <label for="priority">Priority:</label><br>
+        <select name="task-priority" id="priority" required>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select><br>
+        <button type="submit" id="submit">Submit</button>
+    </form>
+  </div>
+ 
+
+
+    <div id="tasks">
+        <h2>Tasks:</h2>
+        <ul id="taskList"></ul>
+    </div>
+   
+    
+  
+
+    <!-- Link the JavaScript file -->
+    <footer>
+        <p>&copy; Deepak Kumar thakur. All rights reserved.</p>
+      </footer>
+      
+      
+      
+      
+      
+      
+    <script src="index.js"></script>
+</body>
+</html>
