@@ -27,6 +27,23 @@ const taskSearch = document.getElementById('taskSearch');
 
 const togglebutton = document.getElementById('togglebutton');
 
+const nav = document.getElementById('nav');
+
+const menu = document.getElementById('menu');
+var visible = true;
+menu.addEventListener('click',function(){
+    if(visible===true){
+        nav.style.display ='block';
+        visible = false;
+    }
+    else{
+        nav.style.display ='none';
+        visible = true;
+
+    } 
+    
+})
+
 // Function for searching the task
 taskSearch.addEventListener('input', function () {
     const query = taskSearch.value.toLowerCase();
@@ -261,6 +278,7 @@ togglebutton.addEventListener('click', () => {
         flag = true;
    }
 });
+
 
 
 
