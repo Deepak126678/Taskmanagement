@@ -40,6 +40,7 @@ button{
     font-size: 30px;
    
 }
+
 #taskList div {
     margin-left: 20px; 
     display: block; 
@@ -159,7 +160,7 @@ img{
     position:absolute;
     height:400px;
     right:20px;
-    top:30%;
+    top:33%;
 }
 
 
@@ -172,6 +173,24 @@ MediaQuery for resonsiveness
         font-size: 34px;
         
         font-family: 'Roboto', sans-serif;
+    }
+    #taskForm {
+        max-width: 100%;
+        height:50%;
+        
+        align-items: center;
+       
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    #task-title{
+        margin-left:25%;
+    }
+    #task-desc{
+        margin-left:25%;
+
     }
     nav{
         display: flex;
@@ -198,6 +217,7 @@ MediaQuery for resonsiveness
   img{
     display:none;
   }
+
 
 }
 
