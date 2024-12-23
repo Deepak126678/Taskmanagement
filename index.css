@@ -23,7 +23,8 @@ button{
     height: 50px;
     width:120px;
     background-color: blue;
-    color:white;
+    color: white;
+    
    
 }
 
@@ -153,11 +154,18 @@ button:hover{
     width:100%;
     background-color: black;
 }
+img{
+    position:absolute;
+    height:400px;
+    right:20px;
+    top:30%;
+}
+
 
 /**
 MediaQuery for resonsiveness 
 **/
-@media screen and (max-width:1100px) {
+@media screen and (max-width: 1100px) {
     #headline{
         text-align: center;
         font-size: 34px;
@@ -170,8 +178,8 @@ MediaQuery for resonsiveness
         justify-content: space-evenly;
     }
     h1{
+        background-color: #f5f5f5;
         text-align: center;
-        background-color:#f5f5f5;
     }
     h3{
         text-align: center;
@@ -182,10 +190,14 @@ MediaQuery for resonsiveness
         height: 70px;
         width:150px;
         background-color: grey;
-        margin-top:30px;
+        margin-top: 30px;
         
         color: white;
   }
+  img{
+    display:none;
   }
+
+}
 
 
