@@ -17,7 +17,7 @@ const taskDiv = document.getElementById('taskDiv');
 
 const button = document.getElementById('button');
 /**
- * `priorityFilter` Forthe dropdown which displays the task with the priority
+ * `priorityFilter` For the dropdown which displays the task with the priority
  */
 const priorityFilter = document.getElementById('priorityfilter');
 /**
@@ -32,54 +32,47 @@ const nav = document.getElementById('nav');
 const menu = document.getElementById('menu');
 
 var visible = true;
-menu.addEventListener('click',function(){
-    if(visible===true){
-        nav.style.display ='block';
+menu.addEventListener('click', function () {
+    if (visible === true) {
+        nav.style.display = 'block';
         visible = false;
-    }
-    else{
-        nav.style.display ='none';
+    } else {
+        nav.style.display = 'none';
         visible = true;
+    }
+});
 
-    } 
-    
-})
 /**
- * `taskstatus` selecting the user selected task status
+ * `taskstatus` Selecting the user-selected task status
  */
 const taskstatus = document.getElementById('taskstatus');
+
 /**
- *  when there is change in the value of taskstatus 
- * Eventlistner callbacks to this annonymous function
+ * When there is a change in the value of taskstatus
+ * Event listener callbacks to this anonymous function
  */
-taskstatus.addEventListener('change',function(){
-    const statusfilter = taskstatus.value;
-    const tasks = Array.from(taskList.children);
+taskstatus.addEventListener('change', function () {
+    const statusfilter = taskstatus.value; // Get the selected filter value
+    const tasks = Array.from(taskList.children); // Get all task list items
+
     tasks.forEach(task => {
-        const cheakbox = task.querySelector('input[type="checkbox"]');
-        if(statusfilter==='All'){
-            task.style.display = 'block'
+        const checkbox = task.querySelector('input[type="checkbox"]'); // Find the checkbox for the task
+
+        if (statusfilter === 'All') {
+            task.style.display = 'block'; // Show all tasks
+        } else if (statusfilter === 'Complete' && checkbox.checked) {
+            task.style.display = 'block'; // Show completed tasks
+        } else if (statusfilter === 'Incomplete' && !checkbox.checked) {
+            task.style.display = 'block'; // Show incomplete tasks
+        } else {
+            task.style.display = 'none'; // Hide tasks that do not match the filter
         }
-    
-        else if( cheakbox.checked  ){
-            task.style.display = 'block'
-        }
-       
-        else if( statusfilter === 'Incompleted' && !cheakbox.checked){
-           // console.log(statusfilter==='Incompleted' &&!cheakbox.checked);
-            task.style.display = 'block'
-        }
-        else{
-            task.style.display = 'none'
-        }
-            
-    
     });
-})
+});
+
 /**
  * Function for searching the task
  */
-
 taskSearch.addEventListener('input', function () {
     const query = taskSearch.value.toLowerCase();
     const tasks = Array.from(taskList.children);
@@ -151,6 +144,7 @@ function addTaskToUI(task) {
         default:
             taskTitle.style.color = 'black';
     }
+    //creating cheakbox for the task-title
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -159,11 +153,9 @@ function addTaskToUI(task) {
     checkbox.addEventListener('change', function () {
         if (checkbox.checked) {
             taskTitle.style.textDecoration = 'line-through';
-            var taskcomplete = true;
             taskTitle.style.color = 'gray'; // Temporary color when checked
         } else {
             taskTitle.style.textDecoration = 'none';
-            taskcomplete = false;
             // Reset to priority color
             switch (task.priority.toLowerCase()) {
                 case 'high':
@@ -180,6 +172,7 @@ function addTaskToUI(task) {
             }
         }
     });
+    //adding cheakbox and tasktitle to the ListItem
 
     listItem.appendChild(checkbox);
     listItem.appendChild(taskTitle);
@@ -192,14 +185,14 @@ function addTaskToUI(task) {
 
     const taskPriority = document.createElement('h3');
     taskPriority.innerHTML = `<h3>Priority:</h3> ${task.priority}`;
-
+     
     desc.appendChild(taskDescription);
     desc.appendChild(taskPriority);
 
     const showMore = document.createElement('button');
     showMore.textContent = 'Show More';
     showMore.style.marginRight = '10px';
-
+    //for showing the description and priority
     showMore.addEventListener('click', function () {
         if (desc.style.display === 'none') {
             desc.style.display = 'block';
@@ -209,10 +202,11 @@ function addTaskToUI(task) {
             showMore.textContent = 'Show More';
         }
     });
-
+    
     const editButton = document.createElement('button');
     editButton.textContent = 'Edit';
     editButton.style.marginRight = '10px';
+    //function for editing a task
     editButton.addEventListener('click', function () {
         const newTitle = prompt('Edit Task Title:', task.title);
         const newDescription = prompt('Edit Task Description:', task.description);
@@ -229,7 +223,7 @@ function addTaskToUI(task) {
 
             /**
              * Update title color based on new priority
-              */ 
+             */ 
             switch (task.priority.toLowerCase()) {
                 case 'high':
                     taskTitle.style.color = 'red';
@@ -266,7 +260,6 @@ function addTaskToUI(task) {
 
     taskList.appendChild(listItem);
 }
-
 // Update task in local storage
 function updateTaskInLocalStorage(updatedTask) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -276,24 +269,20 @@ function updateTaskInLocalStorage(updatedTask) {
     }
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
-
 // Remove a task from local storage
 function deleteTaskFromLocalStorage(taskToDelete) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const updatedTasks = tasks.filter(task => task.title !== taskToDelete.title);
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
 }
-
 // Show the task form when the button is clicked
 button.addEventListener('click', () => {
     taskDiv.style.display = 'block';
 });
-
 // Event listener for priority filter
 priorityFilter.addEventListener('change', function () {
     const selectedPriority = priorityFilter.value;
     const tasks = Array.from(taskList.children);
-
     tasks.forEach(task => {
         if (selectedPriority === 'All' || task.dataset.priority === selectedPriority) {
             task.style.display = 'block';
@@ -304,17 +293,16 @@ priorityFilter.addEventListener('change', function () {
 });
 
 let flag = true;
-togglebutton.addEventListener('click', () => {
-   if (flag === true) {
-        body.style.backgroundColor = 'black';
-        body.style.color = 'white';
+togglebutton.addEventListener('click', function () {
+    if (flag === true) {
+        document.body.style.backgroundColor = 'black';
         flag = false;
-   } else {
-        body.style.backgroundColor = 'white';
-        body.style.color = 'black';
+    } else {
+        document.body.style.backgroundColor = 'white';
         flag = true;
-   }
+    }
 });
+
 
 
 
