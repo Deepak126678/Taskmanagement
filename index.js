@@ -1,21 +1,40 @@
-// Select form and task list elements
+/**
+ * `body` For selecting HTML Document body
+ */
 const body = document.body;
+/**
+ * `taskForm` For selecting the  Form
+ */
 const taskForm = document.getElementById('taskForm');
+/**
+ * `tasklist` For selecting the ul For appending the task
+ */
 const taskList = document.getElementById('taskList');
+/**
+ * `taskDiv` The main Div for showing the Taskform 
+ */
 const taskDiv = document.getElementById('taskDiv');
+
 const button = document.getElementById('button');
+/**
+ * `priorityFilter` Forthe dropdown which displays the task with the priority
+ */
 const priorityFilter = document.getElementById('priorityfilter');
+/**
+ * `taskSearch` For searching the task 
+ */
 const taskSearch = document.getElementById('taskSearch');
+
 const togglebutton = document.getElementById('togglebutton');
 
-// Add event listener for search functionality
+// Function for searching the task
 taskSearch.addEventListener('input', function () {
     const query = taskSearch.value.toLowerCase();
     const tasks = Array.from(taskList.children);
 
     tasks.forEach(task => {
         const title = task.querySelector('h1').textContent.toLowerCase();
-        const description = task.querySelector('h2').textContent.toLowerCase();
+        const description = task.querySelector('h3').textContent.toLowerCase();
 
         if (title.includes(query) || description.includes(query)) {
             task.style.display = 'block';
@@ -88,9 +107,11 @@ function addTaskToUI(task) {
     checkbox.addEventListener('change', function () {
         if (checkbox.checked) {
             taskTitle.style.textDecoration = 'line-through';
+            var taskcomplete = true;
             taskTitle.style.color = 'gray'; // Temporary color when checked
         } else {
             taskTitle.style.textDecoration = 'none';
+            taskcomplete = false;
             // Reset to priority color
             switch (task.priority.toLowerCase()) {
                 case 'high':
@@ -115,10 +136,10 @@ function addTaskToUI(task) {
     desc.style.display = 'none';
 
     const taskDescription = document.createElement('h3');
-    taskDescription.innerHTML = `<strong>Description:</strong> ${task.description}`;
+    taskDescription.innerHTML = `<h3>Description:</h3>${task.description}`;
 
     const taskPriority = document.createElement('h3');
-    taskPriority.innerHTML = `<strong>Priority:</strong> ${task.priority}`;
+    taskPriority.innerHTML = `<h3>Priority:</h3> ${task.priority}`;
 
     desc.appendChild(taskDescription);
     desc.appendChild(taskPriority);
