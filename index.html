@@ -8,16 +8,16 @@
     <header>
         <h1 id = "headline">Task Management system</h1>
      <nav>
-        <Button id="button">Add Task</Button> 
+        <Button id="button" class="navbutton">Add Task</Button> 
     <label for="priorityfilter">Priority:</label>
-    <select name="task-priority" id="priorityfilter" required>
+    <select name="task-priority" id="priorityfilter"  >
         <option value="All">All</option>
         <option value="High">High</option>
         <option value="Medium">Medium</option>
         <option value="Low">Low</option>
         
     </select><br>
-    <input type="text" id="taskSearch" placeholder="Search tasks..." />
+    
     <label for="taskstatus">TaskStatus</label>
     <select name="taskstatus" id="taskstatus" required>
         <option value="All">All</option>
@@ -26,7 +26,8 @@
         
         
     </select><br>
-    <button id="togglebutton">Switch Mode</button>
+    <input type="text" id="taskSearch" placeholder="Search tasks..." />
+    <button id="togglebutton" class="navbutton">Switch Mode</button>
   
   </nav>
   </header>
@@ -63,7 +64,10 @@
     <!-- Link the JavaScript file -->
     <footer>
         <p>&copy; Deepak Kumar thakur. All rights reserved.</p>
-      </footer>
+    </footer> 
+    <script src="index.js"></script>
+</body>
+</html>
       
       
       
