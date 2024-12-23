@@ -156,7 +156,7 @@ button:hover{
 /**
 MediaQuery for resonsiveness 
 **/
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1100px) {
     #headline{
         text-align: center;
         font-size: 34px;
