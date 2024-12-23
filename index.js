@@ -30,6 +30,7 @@ const togglebutton = document.getElementById('togglebutton');
 const nav = document.getElementById('nav');
 
 const menu = document.getElementById('menu');
+
 var visible = true;
 menu.addEventListener('click',function(){
     if(visible===true){
@@ -43,8 +44,42 @@ menu.addEventListener('click',function(){
     } 
     
 })
+/**
+ * `taskstatus` selecting the user selected task status
+ */
+const taskstatus = document.getElementById('taskstatus');
+/**
+ *  when there is change in the value of taskstatus 
+ * Eventlistner callbacks to this annonymous function
+ */
+taskstatus.addEventListener('change',function(){
+    const statusfilter = taskstatus.value;
+    const tasks = Array.from(taskList.children);
+    tasks.forEach(task => {
+        const cheakbox = task.querySelector('input[type="checkbox"]');
+        if(statusfilter==='All'){
+            task.style.display = 'block'
+        }
+    
+        else if( cheakbox.checked  ){
+            task.style.display = 'block'
+        }
+       
+        else if( statusfilter === 'Incompleted' && !cheakbox.checked){
+           // console.log(statusfilter==='Incompleted' &&!cheakbox.checked);
+            task.style.display = 'block'
+        }
+        else{
+            task.style.display = 'none'
+        }
+            
+    
+    });
+})
+/**
+ * Function for searching the task
+ */
 
-// Function for searching the task
 taskSearch.addEventListener('input', function () {
     const query = taskSearch.value.toLowerCase();
     const tasks = Array.from(taskList.children);
@@ -192,7 +227,9 @@ function addTaskToUI(task) {
             taskDescription.innerHTML = `<strong>Description:</strong> ${task.description}`;
             taskPriority.innerHTML = `<strong>Priority:</strong> ${task.priority}`;
 
-            // Update title color based on new priority
+            /**
+             * Update title color based on new priority
+              */ 
             switch (task.priority.toLowerCase()) {
                 case 'high':
                     taskTitle.style.color = 'red';
