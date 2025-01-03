@@ -336,7 +336,7 @@ function applyFilters() {
         const matchesPriority =
             selectedPriority === 'All' || taskPriority === selectedPriority;
 
-        // Display the task only if it matches both filters
+          // Display the task only if it matches both filters  
         if (matchesStatus && matchesPriority) {
             task.style.display = 'block';
         } else {
