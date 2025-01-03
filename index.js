@@ -44,31 +44,6 @@ menu.addEventListener('click', function () {
 
 /**
  * `taskstatus` Selecting the user-selected task status
- */
-const taskstatus = document.getElementById('taskstatus');
-
-/**
- * When there is a change in the value of taskstatus
- * Event listener callbacks to this anonymous function
- */
-taskstatus.addEventListener('change', function () {
-    const statusfilter = taskstatus.value; // Get the selected filter value
-    const tasks = Array.from(taskList.children); // Get all task list items
-
-    tasks.forEach(task => {
-        const checkbox = task.querySelector('input[type="checkbox"]'); // Find the checkbox for the task
-
-        if (statusfilter === 'All') {
-            task.style.display = 'block'; // Show all tasks
-        } else if (statusfilter === 'Complete' && checkbox.checked) {
-            task.style.display = 'block'; // Show completed tasks
-        } else if (statusfilter === 'Incomplete' && !checkbox.checked) {
-            task.style.display = 'block'; // Show incomplete tasks
-        } else {
-            task.style.display = 'none'; // Hide tasks that do not match the filter
-        }
-    });
-});
 
 /**
  * Function for searching the task
@@ -99,8 +74,10 @@ taskForm.addEventListener('submit', function (event) {
     const title = document.getElementById('task-title').value;
     const description = document.getElementById('task-desc').value;
     const priority = document.getElementById('priority').value;
+    const taskid= Math.random();
+    console.log(taskid);
 
-    const task = { title, description, priority };
+    const task = { title, description, priority ,taskid , checked: false};
 
     saveTaskToLocalStorage(task);
     addTaskToUI(task);
@@ -108,6 +85,7 @@ taskForm.addEventListener('submit', function (event) {
     taskForm.reset();
     taskDiv.style.display = 'none';
 });
+
 
 // Save a task to local storage
 function saveTaskToLocalStorage(task) {
@@ -122,7 +100,11 @@ function loadTasksFromLocalStorage() {
     tasks.forEach(addTaskToUI);
 }
 
-// Add a task to the UI
+/**
+ * 
+ * @param {object} task  It is an object which contains the task title task description 
+ * task id and input cheakin value 
+ */
 function addTaskToUI(task) {
     const listItem = document.createElement('div');
     listItem.dataset.priority = task.priority;
@@ -148,9 +130,22 @@ function addTaskToUI(task) {
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
+    checkbox.checked = task.checked;
+
+    const checkboxLabel = document.createElement('label');
+    checkboxLabel.textContent = 'Task Current Status';
+    checkboxLabel.style.color = 'grey'
+
+    if (checkbox.checked) {
+        taskTitle.style.textDecoration = 'line-through';
+        taskTitle.style.color = 'gray';
+    }
+
     checkbox.style.marginRight = '10px';
 
     checkbox.addEventListener('change', function () {
+        task.checked = checkbox.checked; // Update the task's checked state
+    updateTaskInLocalStorage(task); // Save the updated state to localStorage
         if (checkbox.checked) {
             taskTitle.style.textDecoration = 'line-through';
             taskTitle.style.color = 'gray'; // Temporary color when checked
@@ -172,9 +167,12 @@ function addTaskToUI(task) {
             }
         }
     });
-    //adding cheakbox and tasktitle to the ListItem
-
+    /**
+     * adding cheakbox , cheakboxLabel and tasktitle to the ListItem
+     */
     listItem.appendChild(checkbox);
+    listItem.appendChild(checkboxLabel);
+   
     listItem.appendChild(taskTitle);
 
     const desc = document.createElement('div');
@@ -211,10 +209,13 @@ function addTaskToUI(task) {
         const newTitle = prompt('Edit Task Title:', task.title);
         const newDescription = prompt('Edit Task Description:', task.description);
         const newPriority = prompt('Edit Task Priority (High, Medium, Low):', task.priority);
-
+/**
+ * if all the the values of new edited task are there then only the  code 
+ * within the if else block will run
+ */
         if (newTitle && newDescription && newPriority) {
             task.title = newTitle;
-            task.description = newDescription;
+            task.description = newDescription; 
             task.priority = newPriority;
 
             taskTitle.textContent = task.title;
@@ -272,7 +273,8 @@ function updateTaskInLocalStorage(updatedTask) {
 // Remove a task from local storage
 function deleteTaskFromLocalStorage(taskToDelete) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const updatedTasks = tasks.filter(task => task.title !== taskToDelete.title);
+   // const updatedTasks = tasks.filter(task => task.index !== taskToDelete.index);
+   const updatedTasks = tasks.filter(task => task.taskid== taskToDelete.taskid);
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
 }
 // Show the task form when the button is clicked
@@ -280,17 +282,17 @@ button.addEventListener('click', () => {
     taskDiv.style.display = 'block';
 });
 // Event listener for priority filter
-priorityFilter.addEventListener('change', function () {
-    const selectedPriority = priorityFilter.value;
-    const tasks = Array.from(taskList.children);
-    tasks.forEach(task => {
-        if (selectedPriority === 'All' || task.dataset.priority === selectedPriority) {
-            task.style.display = 'block';
-        } else {
-            task.style.display = 'none';
-        }
-    });
-});
+//priorityFilter.addEventListener('change', function () {
+    //const selectedPriority = priorityFilter.value;
+     //comarr = Array.from(taskList.children);
+     //comarr.forEach(task => {
+       // if (selectedPriority === 'All' || task.dataset.priority === selectedPriority) {
+       //     task.style.display = 'block';
+       // } else {
+      //      task.style.display = 'none';
+    //    }
+  //  });
+//});
 
 let flag = true;
 togglebutton.addEventListener('click', function () {
@@ -305,14 +307,42 @@ togglebutton.addEventListener('click', function () {
 
 
 
+/**
+ *applying eventlistner to the priorityfiltor and prioritystatus with a high order function
+ callback with will be used for filtoring over each other selected task by cheaking the conditions
+ */
+priorityFilter.addEventListener('change', applyFilters);
+taskstatus.addEventListener('change', applyFilters);
+/*
+ *Function to apply filters based on priority and status
+*/
+function applyFilters() {
+    const selectedPriority = priorityFilter.value; 
+    const selectedStatus = taskstatus.value; 
 
+    const tasks = Array.from(taskList.children); 
 
+    tasks.forEach(task => {
+        const checkbox = task.querySelector('input[type="checkbox"]'); 
+        const taskPriority = task.dataset.priority; 
 
+        // Determine if the task matches the selected status
+        const matchesStatus =
+            ( selectedStatus === 'All' ) ||
+            (selectedStatus === 'Complete' && checkbox.checked) ||
+            (selectedStatus === 'Incomplete' && !checkbox.checked);
 
+        // Determine if the task matches the selected priority
+        const matchesPriority =
+            selectedPriority === 'All' || taskPriority === selectedPriority;
 
-
-
-
-
+        // Display the task only if it matches both filters
+        if (matchesStatus && matchesPriority) {
+            task.style.display = 'block';
+        } else {
+            task.style.display = 'none';
+        }
+    });
+}
 
 
