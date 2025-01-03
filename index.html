@@ -35,18 +35,16 @@
   </nav>
   </div>
   </header>
-  
-    
-
-  
   <div id="taskDiv" style="display: none;">
     <form id="taskForm">
         <label for="task-title">Enter Task Title:</label><br>
-        <input type="text" id="task-title" required><br>
+        <input type="text" id="task-title"  class="inputbar"><br>
         <label for="task-desc">Task Description</label><br>
-        <textarea id="task-desc" name="task-desc" rows="8" cols="40" required></textarea><br>
+        <textarea id="task-desc" name="task-desc" rows="8" cols="40" class="inputbar" required>
+
+        </textarea><br>
         <label for="priority">Priority:</label><br>
-        <select name="task-priority" id="priority" required>
+        <select name="task-priority" id="priority" class="inputbar" required>
             <option value="High">High</option>
             <option value="Medium">Medium</option>
             <option value="Low">Low</option>
@@ -54,35 +52,14 @@
         <button type="submit" id="submit">Submit</button>
     </form>
   </div>
- 
-
-
     <div id="tasks">
         <h2>Tasks:</h2>
         <ul id="taskList"></ul>
         <img src="motivation.jpg">
     </div>
-   
-    
-  
-
-    
     <footer>
         <p>&copy; Deepak kumar thakur.</p>
       </footer>
-      
-      
-      
-      
-      
-      
-    <script src="index.js"></script>
+     <script src="index.js"></script>
 </body>
 </html>
-      
-      
-      
-      
-      
-      
-
